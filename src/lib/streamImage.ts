@@ -32,6 +32,7 @@ export async function streamImage(
   }
 
   let sawCompleted = false;
+  let lastB64: string | null = null;
   const parser = createParser({
     onEvent(event) {
       if (
@@ -45,6 +46,8 @@ export async function streamImage(
       } catch {
         return;
       }
+      if (!payload.b64_json) return;
+      lastB64 = payload.b64_json;
       const isFinal = event.event === "image_generation.completed";
       flushSync(() => {
         onFrame(`data:image/png;base64,${payload.b64_json}`, isFinal);
@@ -63,5 +66,15 @@ export async function streamImage(
   } finally {
     reader.cancel().catch(() => {});
   }
-  if (!sawCompleted) throw new Error("Image stream ended without a completed event");
+  // Some upstream responses end without an explicit completed event.
+  // If we received any frame, promote the last one to final instead of throwing.
+  if (!sawCompleted) {
+    if (lastB64) {
+      flushSync(() => {
+        onFrame(`data:image/png;base64,${lastB64}`, true);
+      });
+    } else {
+      throw new Error("Image stream ended without any image data");
+    }
+  }
 }
