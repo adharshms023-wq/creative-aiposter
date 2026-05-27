@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "ai poster" },
+      { name: "description", content: "AI Poster Pro generates high-quality AI posters from simple text prompts." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "ai poster" },
+      { property: "og:description", content: "AI Poster Pro generates high-quality AI posters from simple text prompts." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "ai poster" },
+      { name: "twitter:description", content: "AI Poster Pro generates high-quality AI posters from simple text prompts." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c51f1a72-6013-4e46-ba01-62ad5a2e7221/id-preview-fd03e262--199cb09e-1135-44d8-a0ad-36ca952d3db1.lovable.app-1779871508782.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c51f1a72-6013-4e46-ba01-62ad5a2e7221/id-preview-fd03e262--199cb09e-1135-44d8-a0ad-36ca952d3db1.lovable.app-1779871508782.png" },
     ],
     links: [
       {
