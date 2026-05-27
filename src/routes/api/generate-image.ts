@@ -14,6 +14,7 @@ export const Route = createFileRoute("/api/generate-image")({
           return new Response("Missing LOVABLE_API_KEY", { status: 500 });
         }
 
+        // Gemini 3.1 Flash Image (Nano Banana 2) — fast, pro-quality, native partial frames.
         const upstream = await fetch(
           "https://ai.gateway.lovable.dev/v1/images/generations",
           {
@@ -23,13 +24,10 @@ export const Route = createFileRoute("/api/generate-image")({
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              model: "openai/gpt-image-2",
-              prompt,
-              quality: "low",
-              size: "1024x1024",
-              n: 1,
+              model: "google/gemini-3.1-flash-image-preview",
+              messages: [{ role: "user", content: prompt }],
+              modalities: ["image", "text"],
               stream: true,
-              partial_images: 2,
             }),
             signal: request.signal,
           },
@@ -46,6 +44,7 @@ export const Route = createFileRoute("/api/generate-image")({
           headers: {
             "Content-Type": "text/event-stream",
             "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
           },
         });
       },
