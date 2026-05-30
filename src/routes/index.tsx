@@ -5,11 +5,11 @@ export const Route = createFileRoute("/")({
   component: PosterStudio,
   head: () => ({
     meta: [
-      { title: "AI Poster Studio — Generate gaming posters from a prompt" },
+      { title: "PosterForge AI — Create any poster from your idea" },
       {
         name: "description",
         content:
-          "Turn a simple idea into cinematic, 4K AI posters for gaming, YouTube thumbnails, and creator key art. Cyberpunk, anime, realistic and cinematic styles.",
+          "Generate print-ready posters for events, sales, weddings, movies, gaming and more. Add your title, date, location and CTA — AI designs the poster with real legible text.",
       },
     ],
   }),
